@@ -6,6 +6,7 @@ var multer = require('multer');
 var upload = multer();
 const path = require("path");
 const authenticate = require("./autheticate");
+let red_url = "";
 let samlreq;
 let records = "";
 app.use(cors({
@@ -16,6 +17,7 @@ app.use(upload.array());
 //app.use("/",express.static(path.join(__dirname,"public")));
 app.get("/",(req,res) => { 
     samlreq = req.query.saml;
+    red_url = req.query.url;
     console.log("IDP Running "+samlreq); 
     res.sendFile(path.resolve("public/index.html"));
 });
@@ -75,10 +77,10 @@ app.post("/",(req,res) => {
         </saml:Assertion>
       </samlp:Response>
       `;
-        res.redirect("http://localhost:4000/feed?saml="+samlres);
+        res.redirec(red_url+"feed?saml="+samlres);
     } else {
         res.sendFile(path.resolve("public/index.html"));
         }
         res.end();
 });
-app.listen(6900);
+app.listen(process.env.PORT || 6900);
