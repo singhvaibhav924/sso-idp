@@ -7,7 +7,7 @@ var upload = multer();
 const path = require("path");
 const authenticate = require("./autheticate");
 let samlreq;
-let records = "";
+let records = "none";
 app.use(cors({
     origin: '*'
 })); 
@@ -21,8 +21,8 @@ app.get("/",(req,res) => {
 });
 app.post("/",(req,res) => {
     console.log(" "+req.body.Email);
-    records = authenticate(req.body.Email,req.body.pwd);
-    console.log(records);
+    records = await authenticate(req.body.Email,req.body.pwd);
+    console.log("retrieved records "+records);
     if(records!="none") {
         //generate saml using database
        // console.log(records);
