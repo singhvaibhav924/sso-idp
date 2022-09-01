@@ -1,6 +1,6 @@
 const mysql = require("mysql");
 const env = require("dotenv").config();
-module.exports = function authenticate(email,pwd) {
+module.exports = async function authenticate(email,pwd) {
     let con = mysql.createConnection({
         host: process.env.host, 
         user: process.env.user,

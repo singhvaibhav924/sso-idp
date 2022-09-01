@@ -20,8 +20,8 @@ app.get("/",(req,res) => {
     res.sendFile(path.resolve("public/index.html"));
 });
 app.post("/",(req,res) => {
-    console.log(" "+req.body.Email); 
-    records = authenticate(req.body.Email,req.body.pwd)
+    console.log(" "+req.body.Email);
+    records = await authenticate(req.body.Email,req.body.pwd);
     if(records!="none") {
         //generate saml using database
        // console.log(records);
