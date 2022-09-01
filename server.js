@@ -21,7 +21,8 @@ app.get("/",(req,res) => {
 });
 app.post("/",(req,res) => {
     console.log(" "+req.body.Email);
-    records = await authenticate(req.body.Email,req.body.pwd);
+    records = authenticate(req.body.Email,req.body.pwd);
+    console.log(records);
     if(records!="none") {
         //generate saml using database
        // console.log(records);
