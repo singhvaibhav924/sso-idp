@@ -32,6 +32,7 @@ module.exports = function authenticate(email,pwd) {
             }
             else {
                 console.log(res[0]);
+                console.log(res[0].Email);
                 if(res[0].Password==pwd) {
                     return res[0];
                 } else {
