@@ -8,12 +8,14 @@ module.exports = function authenticate(email,pwd) {
         password: process.env.pwd
     });
     con.connect(error => {
-        if(error) throw error;
-        console.log("Connected!");
+        if(error) {
+            return "none";
+        } else {
+            console.log("Connected!");
         con.query(`select * from Users where Email = "${email}"`,(err,res) => {
             if(err) {
                 console.log(" Error in Retrieving");
-                let res = [
+                let result = [
                     {
                         Name: "Vaibhav Singh" ,
                         Password: "qwerty",
@@ -22,13 +24,14 @@ module.exports = function authenticate(email,pwd) {
                         Age: 21
                     }
                 ]
-                if(res[0].Password==pwd) {
-                    return res[0];
+                if(result[0].Password==pwd) {
+                    return result[0];
                 } else {
                     return "none";
                 }
             }
             else {
+                console.log(res[0]);
                 if(res[0].Password==pwd) {
                     return res[0];
                 } else {
@@ -37,6 +40,8 @@ module.exports = function authenticate(email,pwd) {
             }
             
         }); 
-    })
+
+        }
+            })
     
 }
